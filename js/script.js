@@ -46,15 +46,18 @@ const optArticleSelector = '.post',
 function generateTitleLinks(){
 
   /* remove contents of titleList */
-  const titleList = document.querySelector(optArticleSelector).innerHTML = '';
-  console.log('optTitleListSelector');
+   const titleList = document.querySelector(optArticleSelector).innerHTML = '';
+   console.log('optTitleListSelector'); 
+  
+  /* find all the articles and save them to variable: articles */
+   /* for each article */
+   const articles = document.querySelectorAll('optArticleSelector'); 
+    
+   let html = '';
 
-  /* for each article */
-    const articles = document.querySelectorAll('optArticleSelector');
-    for(let article of articles){
+   for(let article of articles){
       article.classList.remove('article');
-    }
-
+      
     /* get the article id */
     const articleId = article.getAttribute('id')
 
@@ -65,10 +68,14 @@ function generateTitleLinks(){
 
     /* create HTML of the link */
     const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
-
-    /* insert link into titleList */
-
+   
+    /* insert link into html variable */
+     html = html + linkHTML; 
+     console.log('html');
+    }
+    titleList.innerHTML = html;
 }
 
 generateTitleLinks();
+    
 }
