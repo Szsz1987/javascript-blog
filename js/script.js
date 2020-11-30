@@ -48,8 +48,13 @@ function generateTitleLinks(){
   /* remove contents of titleList */
   const titleList = document.querySelector(optArticleSelector).innerHTML = '';
   console.log('optTitleListSelector');
-  
+
   /* for each article */
+    const articles = document.querySelectorAll('optArticleSelector');
+
+    for(let article of articles){
+      article.classList.remove('article');
+    }
 
     /* get the article id */
 
