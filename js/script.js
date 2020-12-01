@@ -10,7 +10,7 @@
     /* [DONE] remove class 'active' from all article links */ 
     const activeLinks = document.querySelectorAll('.titles a.active');
     for(let activeLink of activeLinks){
-      activeLink.classList.remove('active'); 
+      clickedElement.classList.remove('active'); 
     }
 
     /* [DONE] add class 'active' to the clicked link */
