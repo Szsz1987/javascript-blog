@@ -42,6 +42,7 @@
   },
   "dependencies": {
     "@sidvind/better-ajv-errors": "^0.6.10",
+    "eslint-watch": "^7.0.0",
     "html-validate": "^4.0.1",
     "mkdirp": "^1.0.4"
   }
