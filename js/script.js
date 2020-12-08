@@ -35,8 +35,46 @@
   targetArticle.classList.add('active');
  }
 
+const optArticleSelector = '.post'; // articles
+  optTitleSelector = '.post-title'; // headers of articles
+  optTitleListSelector = '.titles'; // left column
+
+
+  function generateTitleLinks() {
+/* remove contents of titleList */
+     const titleList = document.querySelector(optTitleListSelector);
+     titleList.innerHTML = '';
+
+    /* [DONE] for each article */
+    const articles = document.querySelectorAll(optArticleSelector);
+    console.log(articles);
+    let html = '';
+    for(let article of articles){
+
+    /* [DONE] find ID of an article */
+    const articleId = article.getAttribute('id');
+    console.log(articleId);
+
+    /* [DONE] find title of an article */
+    const articleTitle = article.querySelector(optTitleSelector);
+    articleTitle.innerHTML = '';
+    console.log(articleTitle);
+
+    /* [DONE] create HTML of a link */
+    const linkHTML = '<li><a href="#' + articleId + '"><span>'+ articleTitle + '</span></a></li>';
+    console.log(linkHTML);
+
+    /* [DONE] insert link into titleList */
+    html = html + linkHTML;
+    console.log(html);
+    }
+
+  titleList.innerHTML = html;
+
   const links = document.querySelectorAll('.titles a');
   for(let link of links){
     link.addEventListener('click', titleClickHandler);
   }
+}
+generateTitleLinks();
 }
