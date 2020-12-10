@@ -255,10 +255,12 @@ const generateAuthors = function (){
         /* [DONE] add class active */
         clickedAuthor.classList.add('active');
         /* [DONE] END LOOP: for each found author link */
-        }
+  }
 
     /* [DONE] execute function "generateTitleLinks" with article selector as argument */
     generateTitleLinks('[data-author="' + author + '"]');
+
+    }
 
     const addClickListenersToAuthors = function (){
 
