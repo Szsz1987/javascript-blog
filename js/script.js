@@ -6,7 +6,9 @@
   const optArticleTagsSelector = '.post-tags .list'; // <div> tags > ul
   const optArticleAuthorSelector = '.post-author'; // article > h3 > p
   optTitleSelector = '.post-title'; // article > h3
-  const optTagsListSelector = '.tags .list'; // list of tags in the right column
+  optCloudClassCount = 5;
+  optCloudClassPrefix = 'tag-size-';
+
 
   const titleClickHandler = function(event){
   event.preventDefault();
@@ -63,6 +65,32 @@
         }
   };
 generateTitleLinks();
+
+
+const calculateTagClass = function (count, params) {
+  /* find the difference between the most popular tag and the least popular*/
+  const normalizedCount = count - params.min; // 6-2=4
+  const normalizedMax = params.max - params.min; // 10-2=8
+  const percentage = normalizedCount / normalizedMax; // 4/8=0,5
+  const classNumber = Math.floor( percentage * (optCloudClassCount - 1) + 1 ); //(0,5 * 4 (because 5-1)) + 1 = 3
+  return optCloudClassPrefix + classNumber;
+}
+
+const calculateTagsParams = function(tags) {
+  const params = {max:0, min:99999} // object
+
+  for (let tag in tags){
+    console.log(tag + ' is used ' + tags[tag] + ' times');
+    if (tags[tag] > params.max){
+      params.max = tags[tag];
+    }
+    if (tags[tag] < params.min){
+      params.min = tags[tag];
+    }
+
+  }
+  return params;
+}
 
 /* [NEW] create a new variable allTags with an empty object */
 /* find all articles */
@@ -127,10 +155,12 @@ generateTitleLinks();
       tagsWrapper.innerHTML = html;
       }
       const tagList = document.querySelector('ul.tags'); // aside > h2 > ul
+      const tagsParams = calculateTagsParams(allTags);
+      console.log('tagsParams:', tagsParams)
       let allTagsHTML = '';
 
         for(let tag in allTags) {
-          allTagsHTML += '<li><a href="#tag-' + tag + '">' + tag + ' (' + allTags[tag] + ')</a></li>'; // stick (' + allTags[tag] + ')
+          allTagsHTML += '<li><a href="#tag-' + tag + '" class="' + calculateTagClass(allTags[tag], tagsParams) + '">' + tag + ' (' + allTags[tag] + ')</a></li>'; // stick (' + allTags[tag] + ')
         }
     tagList.innerHTML = allTagsHTML;
 
