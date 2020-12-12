@@ -1,14 +1,13 @@
 {
-  'use strict';
+'use strict';
 
   const optArticleSelector = '.post'; // article
-  optTitleListSelector = '.titles'; // left column
+  const optTitleListSelector = '.titles'; // left column
   const optArticleTagsSelector = '.post-tags .list'; // <div> tags > ul
   const optArticleAuthorSelector = '.post-author'; // article > h3 > p
-  optTitleSelector = '.post-title'; // article > h3
-  optCloudClassCount = 5;
-  optCloudClassPrefix = 'tag-size-';
-
+  const optTitleSelector = '.post-title'; // article > h3
+  const optCloudClassCount = 5;
+  const optCloudClassPrefix = 'tag-size-';
 
   const titleClickHandler = function(event){
   event.preventDefault();
@@ -53,7 +52,6 @@
         for(let article of articles){
         const articleId = article.getAttribute('id');
         const articleTitle = article.querySelector(optTitleSelector).innerHTML;
-        articleTitle.innerHTML = '';
         const linkHTML = '<li><a href="#' + articleId + '"><span>'+ articleTitle + '</span></a></li>';
         html = html + linkHTML;
         }
@@ -74,10 +72,10 @@ const calculateTagClass = function (count, params) {
   const percentage = normalizedCount / normalizedMax; // 4/8=0,5
   const classNumber = Math.floor( percentage * (optCloudClassCount - 1) + 1 ); //(0,5 * 4 (because 5-1)) + 1 = 3
   return optCloudClassPrefix + classNumber;
-}
+};
 
 const calculateTagsParams = function(tags) {
-  const params = {max:0, min:99999} // object
+  const params = {max:0, min:99999}; // object
 
   for (let tag in tags){
     console.log(tag + ' is used ' + tags[tag] + ' times');
@@ -90,7 +88,7 @@ const calculateTagsParams = function(tags) {
 
   }
   return params;
-}
+};
 
 /* [NEW] create a new variable allTags with an empty object */
 /* find all articles */
@@ -143,7 +141,7 @@ const calculateTagsParams = function(tags) {
         const articleTagsArray = articleTags.split(' ');
 
           for (let tag of articleTagsArray) {
-          const linkHTML = ' <li><a href="#tag-' + tag + '">' + tag + '</a></li> ';
+          const linkHTML = '<li><a href="#tag-' + tag + '">' + tag + '</a></li>';
           html = html + linkHTML + ' ';
           if(!allTags[tag]){
           allTags[tag] = 1;
@@ -160,7 +158,7 @@ const calculateTagsParams = function(tags) {
       let allTagsHTML = '';
 
         for(let tag in allTags) {
-          allTagsHTML += '<li><a href="#tag-' + tag + '" class="' + calculateTagClass(allTags[tag], tagsParams) + '">' + tag + ' (' + allTags[tag] + ')</a></li>'; // stick (' + allTags[tag] + ')
+          allTagsHTML += '<li><a href="#tag-' + tag + '" class="' + calculateTagClass(allTags[tag], tagsParams) + '">' + tag + ' (' + allTags[tag] + ') </a></li>'; // stick (' + allTags[tag] + ')
         }
     tagList.innerHTML = allTagsHTML;
 
