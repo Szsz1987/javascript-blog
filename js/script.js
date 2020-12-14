@@ -6,9 +6,8 @@ const templates = {
   tagArticleLink: Handlebars.compile(document.querySelector('#template-articleTag-link').innerHTML),
   authorArticleLink: Handlebars.compile(document.querySelector('#template-articleAuthor-link').innerHTML),
   tagCloudLink: Handlebars.compile(document.querySelector('#template-tagCloud-link').innerHTML),
-
-
-}
+  authorRightColumnLink: Handlebars.compile(document.querySelector('#template-articleRightAuthor-link').innerHTML)
+};
 
   const optArticleSelector = '.post'; // article
   const optTitleListSelector = '.titles'; // left column
@@ -264,14 +263,16 @@ const generateAuthors = function (){
   const authorsList = document.querySelector(optAuthorsList);
   console.log(authorsList);
       let allAuthorsHTML = '';
+      const allAuthorsData = {authors: []};
       for (let author in allAuthors) {
-      allAuthorsData.author.push({
-      author: author,
-      count: allAuthors[author],
+      allAuthorsData.authors.push({
+        author: author,
+        count: allAuthors[author],
       });
       }
-      authorsList.innerHTML = templates.authorRightColumnLink(allAuthorsData);
-      };
+      authorsList.innerHTML = allAuthorsHTML;
+    authorsList.innerHTML = templates.authorRightColumnLink(allAuthorsData);
+    };
 generateAuthors();
 
 /*for(let tag in allTags) {
